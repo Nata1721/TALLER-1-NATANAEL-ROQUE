@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import RegistroLectura from './components/RegistroLectura'
+
 
 
 function App() {
@@ -6,7 +8,7 @@ function App() {
 
   return (
     <>
-    <h1>holaaaaa</h1>
+     <RegistroLectura></RegistroLectura>
     </>
   )
 }
