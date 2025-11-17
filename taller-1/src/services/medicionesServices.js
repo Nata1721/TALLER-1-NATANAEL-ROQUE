@@ -1,33 +1,41 @@
-const LOCAL_KEY = "Sanquinta_";
+const LOCAL_KEY = "SANSQUINTA_"
 
 const createMedicion = (medicion) => {
     let mediciones = [];
-    const data = localStorage.getItem(LOCAL_KEY);
 
-    if(data != null){
-        lista = JSON.parse(data)
+    const data = localStorage.getItem(LOCAL_KEY)
+
+    if(data!=null){
+
+        mediciones = JSON.parse(data)
+
 
     }
 
-    mediciones = [...mediciones, medicion];
+    mediciones = [...mediciones, medicion]
 
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(mediciones))
-
+    localStorage.setItem(LOCAL_KEY,JSON.stringify(mediciones))
 
 
 }
 
 const getMediciones = () => {
-    const data = localStorage.getItem(LOCAL_KEY);
+    const data = localStorage.getItem(LOCAL_KEY)
 
-    if(data != null){
-        return JSON.parse(data);
+    if(data!=null){
+        return JSON.parse(data)
 
     }
-
-    return [];
+    
+    return []
 
 }
 
+const deleteMedicion = (medicion) =>{
+    const mediciones = getMediciones();
+    const listaMediciones = mediciones.filter(m=>m.indice != medicion.indice)
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(listaMediciones))
 
-export {createMedicion, getMediciones}
+}
+
+export {createMedicion, getMediciones, deleteMedicion}

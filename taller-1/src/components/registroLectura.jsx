@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
@@ -9,28 +9,37 @@ import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 
 
-function RegistroLectura() {
+function RegistroLectura({ingresarMedicion = () =>{}}) {
     const [fechaHora, setFechaHora] = useState("");
     const [medidor, setMedidor] = useState("01");
     const [direccion, setDireccion] = useState("");
     const [valor, setValor] = useState(1);
     const [medida, setMedida] = useState("Kilowatts");
     const listaMedidores = ["01", "02", "03", "04", "05","06","07","08","09","10"];
+    const toast = useRef(null);
+    const [indice, setIndice] = useState(0)
 
 
-    const ingresarMedicion = () =>{
-        if(fechaHora != "" && direccion != null){}
-
-
+    const clickBoton = () =>{
+        if(direccion != ""){
+            const objeto = {indice,fechaHora, medidor, direccion, valor, medida}
+            console.log(objeto)
+            ingresarMedicion(objeto)
+            toast.current.show({severity:"success", summary: "Medición registrada", detail: "Medición registrada con éxito"})
+            setIndice(indice+1)
+        }
     }
+    
+    
 
 
 
     return (
         <>
+            <Toast ref={toast}/>
             <Calendar id="calendar-24h" value={fechaHora} onChange={(e) => setFechaHora(e.value)} showTime hourFormat="24" dateFormat="dd/mm/yy" />
             <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>
-            <Editor value={direccion} onTextChange={(e) => setDireccion(e.htmlValue)} style={{ height: '320px' }} /> 
+            <Editor id="direccion" value={direccion} onTextChange={(e) => setDireccion(e.textValue.trim())} style={{ height: '320px' }} /> 
             <InputNumber inputId="minmax-buttons" value={valor} onValueChange={(e) => setValor(e.value)} mode="decimal" showButtons min={1} max={500} />
             <div className="flex flex-wrap gap-3">
                 <div className="flex align-items-center">
@@ -47,7 +56,7 @@ function RegistroLectura() {
                 </div>
             </div>
 
-            <Button label="Registrar Medición" onClick={ingresarMedicion}/>
+            <Button label="Registrar Medición" onClick={clickBoton}/>
         
         
         
