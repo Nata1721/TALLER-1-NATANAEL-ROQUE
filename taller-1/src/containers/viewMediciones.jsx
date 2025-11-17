@@ -14,6 +14,12 @@ function ViewMediciones({ mediciones, borrarMedicion }) {
     console.log(medicion)
 
   }
+
+  const valorBody = (medicion) =>{
+    
+    return `${medicion.valor} ${medicion.medida.unidad}`
+
+  }
   const accionesBody = (medicion) =>{
     return <Button severity="danger" label="Eliminar Medición" onClick={() => eliminarMedicion(medicion)}/>
 
@@ -24,10 +30,10 @@ function ViewMediciones({ mediciones, borrarMedicion }) {
 
       <Toast ref={toast}/>
       <DataTable value={mediciones} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
-        <Column field="fechaHora" header="Fecha"></Column>
-        <Column field="fechaHora" header="Hora"></Column>
+        <Column field="fecha" header="Fecha"></Column>
+        <Column field="hora" header="Hora"></Column>
         <Column field="medidor" header="Medidor"></Column>
-        <Column field="valor" header="Valor"></Column>
+        <Column body={valorBody} header="Valor"></Column>
         <Column body={accionesBody} header="Acciones"></Column>
       </DataTable>
     </>
