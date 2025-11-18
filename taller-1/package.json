@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "primeicons": "^7.0.0",
     "primereact": "^10.9.7",
     "quill": "^2.0.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router": "^7.9.6",
     "sass": "^1.93.3",
     "vite-plugin-sass": "^0.1.0"
   },
