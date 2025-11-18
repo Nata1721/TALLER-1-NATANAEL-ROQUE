@@ -38,4 +38,6 @@ const deleteMedicion = (medicion) =>{
 
 }
 
+
+
 export {createMedicion, getMediciones, deleteMedicion}

@@ -3,7 +3,6 @@ import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import './index.scss'
-import App from "./App"
 import CreateMediciones from './containers/createMediciones';
 import MedicionesExistentes from './containers/medicionesExistentes';
 

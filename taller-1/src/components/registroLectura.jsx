@@ -30,12 +30,32 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
 
 
     const clickBoton = () =>{
-        if(direccion != ""){
+
+        
+
+        if(fecha != "" && hora != "" && direccion != "" ){
             const objeto = {indice,fecha, hora, medidor, direccion, valor, medida}
             ingresarMedicion(objeto)
             toast.current.show({severity:"success", summary: "Medición registrada", detail: "Medición registrada con éxito"})
             setIndice(indice+1)
         }
+        else{
+            let listaErrores = []
+            if(fecha == ""){
+                listaErrores.push("-El campo fecha no puede estar vacío")
+            }
+
+            if(hora == ""){
+                listaErrores.push("-El campo hora no puede estar vacío")
+            }
+
+            if(direccion == ""){
+                listaErrores.push("-El campo dirección no puede estar vacío")
+            }
+
+            toast.current.show({severity:"danger", summary: "Error al registrar medición", detail: listaErrores})
+        }
+
     }
     
     
@@ -46,7 +66,7 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
         <>
             <Toast ref={toast}/>
             
-                <Calendar id="calendar-24h" value={fecha} onChange={(e) => setFecha(e.value)} showTime hourFormat="24" dateFormat="dd/mm/yy" />
+                <Calendar id="calendar-24h" value={fecha} onChange={(e) => setFecha(e.value)} hourFormat="24" dateFormat="dd/mm/yy" />
                 <Calendar value={hora} onChange={(e) => setHora(e.value)} timeOnly />
             
             <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>

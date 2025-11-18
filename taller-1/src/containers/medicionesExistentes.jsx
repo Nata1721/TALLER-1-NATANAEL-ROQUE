@@ -17,6 +17,7 @@ function MedicionesExistentes() {
     }
 
 
+    
     return (
         <>
             <NavBar></NavBar>
