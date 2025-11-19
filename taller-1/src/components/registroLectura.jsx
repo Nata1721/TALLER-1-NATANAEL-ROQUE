@@ -40,6 +40,13 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
             ingresarMedicion(objeto)
             toast.current.show({severity:"success", summary: "Medición registrada", detail: "Medición registrada con éxito"})
             setIndice(indice+1)
+            setFecha("")
+            setHora("")
+            setMedidor("01")
+            setDireccion("")
+            setValor(1)
+            setMedida(medidas[0])
+
         }
         else{
             let listaErrores = []
@@ -55,7 +62,7 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
                 listaErrores.push("-El campo dirección no puede estar vacío")
             }
 
-            toast.current.show({severity:"danger", summary: "Error al registrar medición", detail: listaErrores})
+            toast.current.show({severity:"danger", summary: "Error al registrar medición", detail: listaErrores.join("\n")})
         }
 
     }
@@ -94,7 +101,7 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
                         <label htmlFor="valor" >Valor</label>
                     </FloatLabel>
                     </div>
-                    <div className="col">
+                    <div className="col mt-3">
                         <label htmlFor="" className='mt-3'>Tipo de medida: </label>
                         <div className="card flex justify-content-center">
                         <div className="flex flex-column gap-3">
@@ -112,7 +119,7 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
             </div>
             </Panel>
 
-            <Button label="Registrar Medición" onClick={clickBoton}/>
+            <Button className="mt-3" label="Registrar Medición" onClick={clickBoton}/>
         
         
         
