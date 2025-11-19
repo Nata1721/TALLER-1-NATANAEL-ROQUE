@@ -7,6 +7,8 @@ import { InputNumber } from 'primereact/inputnumber';
 import { RadioButton } from 'primereact/radiobutton';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
+import { Panel } from 'primereact/panel';
+import { FloatLabel } from "primereact/floatlabel"; 
 
 
 function RegistroLectura({ingresarMedicion = () =>{}}) {
@@ -34,7 +36,7 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
         
 
         if(fecha != "" && hora != "" && direccion != "" ){
-            const objeto = {indice,fecha, hora, medidor, direccion, valor, medida}
+            const objeto = {indice, fecha:fecha.toLocaleDateString("es-CL"), hora:hora.toLocaleTimeString("es-CL", { hour: "2-digit", minute: "2-digit" }), medidor, direccion, valor, medida}
             ingresarMedicion(objeto)
             toast.current.show({severity:"success", summary: "Medición registrada", detail: "Medición registrada con éxito"})
             setIndice(indice+1)
@@ -65,25 +67,35 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
     return (
         <>
             <Toast ref={toast}/>
+            <Panel>
+                
+                <FloatLabel>
+                    <Calendar id="calendar" value={fecha} onChange={(e) => setFecha(e.value)} hourFormat="24" dateFormat="dd/mm/yy" />
+                    <label htmlFor='calendar'>Fecha</label>
+                </FloatLabel>
+
+                <FloatLabel>
+                    <Calendar id="hora" value={hora} onChange={(e) => setHora(e.value)} timeOnly />
+                    <label htmlFor='hora'>Hora</label>
+                </FloatLabel>
+
+                <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>
             
-                <Calendar id="calendar-24h" value={fecha} onChange={(e) => setFecha(e.value)} hourFormat="24" dateFormat="dd/mm/yy" />
-                <Calendar value={hora} onChange={(e) => setHora(e.value)} timeOnly />
-            
-            <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>
-            <Editor id="direccion" value={direccion} onTextChange={(e) => setDireccion(e.textValue.trim())} style={{ height: '320px' }} /> 
-            <InputNumber inputId="minmax-buttons" value={valor} onValueChange={(e) => setValor(e.value)} mode="decimal" showButtons min={1} max={500} />
-            <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-3">
-                {medidas.map((m) => {
-                    return (
-                        <div key={m.nombre} className="flex align-items-center">
-                            <RadioButton inputId={m.nombre} name="category" value={m} onChange={(e) => setMedida(e.value)} checked={medida.unidad === m.unidad} />
-                            <label htmlFor={m.nombre} className="ml-2">{m.nombre}</label>
-                        </div>
-                    );
-                })}
+                <Editor id="direccion" value={direccion} onTextChange={(e) => setDireccion(e.textValue.trim())} style={{ height: '320px' }} /> 
+                <InputNumber inputId="minmax-buttons" value={valor} onValueChange={(e) => setValor(e.value)} mode="decimal" showButtons min={1} max={500} />
+                <div className="card flex justify-content-center">
+                <div className="flex flex-column gap-3">
+                    {medidas.map((m) => {
+                        return (
+                            <div key={m.nombre} className="flex align-items-center">
+                                <RadioButton inputId={m.nombre} name="category" value={m} onChange={(e) => setMedida(e.value)} checked={medida.unidad === m.unidad} />
+                                <label htmlFor={m.nombre} className="ml-2">{m.nombre}</label>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+            </Panel>
 
             <Button label="Registrar Medición" onClick={clickBoton}/>
         

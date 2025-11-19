@@ -8,8 +8,8 @@ function NavBar() {
     let navigate = useNavigate();
 
     const items = [
-        {label:"Crear", icon:"pi pi-android", command: () => {navigate("/create")}},
-        {label:"Ver", icon:"pi pi-android", command: () => {navigate("/view")}}
+        {label:"Registrar medición", icon:"pi pi-upload", command: () => {navigate("/create")}},
+        {label:"Mediciones registradas", icon:"pi pi-folder", command: () => {navigate("/view")}}
     ]
 
     return (

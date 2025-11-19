@@ -48,11 +48,11 @@ function ViewMediciones({ mediciones, borrarMedicion }) {
     <>
 
       <Toast ref={toast}/>
-      <div class="row">
+      
             <Dropdown value={unidad} onChange={(e) => setUnidad(e.value)} options={unidades} optionLabel="unidad" 
-                    placeholder="Unidades de medida" className="w-full md:w-14rem" />
-            <Button label="Filtrar" onClick={()=>setUnidadFiltro(unidad)}   />
-      </div>
+                    placeholder="Unidades de medida" className="w-full md:w-14rem mt-3 me-3 mb-3" />
+            <Button className="mb-3" label="Filtrar" onClick={()=>setUnidadFiltro(unidad)}   />
+      
       <DataTable value={listaAux} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
         <Column field="fecha" sortable header="Fecha"></Column>
         <Column field="hora" header="Hora"></Column>
