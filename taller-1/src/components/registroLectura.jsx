@@ -79,20 +79,31 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
                     <label htmlFor='hora'>Hora</label>
                 </FloatLabel>
 
+                <label htmlFor="" className='me-3'>Medidor </label>
                 <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>
             
                 <Editor id="direccion" value={direccion} onTextChange={(e) => setDireccion(e.textValue.trim())} style={{ height: '320px' }} /> 
-                <InputNumber inputId="minmax-buttons" value={valor} onValueChange={(e) => setValor(e.value)} mode="decimal" showButtons min={1} max={500} />
-                <div className="card flex justify-content-center">
-                <div className="flex flex-column gap-3">
-                    {medidas.map((m) => {
-                        return (
-                            <div key={m.nombre} className="flex align-items-center">
-                                <RadioButton inputId={m.nombre} name="category" value={m} onChange={(e) => setMedida(e.value)} checked={medida.unidad === m.unidad} />
-                                <label htmlFor={m.nombre} className="ml-2">{m.nombre}</label>
-                            </div>
-                        );
-                    })}
+                <div className="row">
+                    <div className="col mt-5">
+                    <FloatLabel>
+                        <InputNumber id="valor"  inputId="minmax-buttons" value={valor} onValueChange={(e) => setValor(e.value)} mode="decimal" showButtons min={1} max={500} />
+                        <label htmlFor="valor" >Valor</label>
+                    </FloatLabel>
+                    </div>
+                    <div className="col">
+                        <label htmlFor="" className='mt-3'>Tipo de medida: </label>
+                        <div className="card flex justify-content-center">
+                        <div className="flex flex-column gap-3">
+                            {medidas.map((m) => {
+                                return (
+                                    <div key={m.nombre} className="flex align-items-center mt-3">
+                                        <RadioButton inputId={m.nombre} name="category" value={m} onChange={(e) => setMedida(e.value)} checked={medida.unidad === m.unidad} />
+                                        <label htmlFor={m.nombre} className="ml-2">{m.nombre}</label>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
             </Panel>
