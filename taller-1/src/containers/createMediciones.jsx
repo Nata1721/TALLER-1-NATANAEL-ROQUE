@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import RegistroLectura from '../components/RegistroLectura'
+import RegistroLectura from '../components/registroLectura'
 import { createMedicion, getMediciones } from '../services/medicionesServices'
 import NavBar from '../components/navBar'
 
