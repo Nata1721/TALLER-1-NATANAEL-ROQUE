@@ -68,21 +68,25 @@ function RegistroLectura({ingresarMedicion = () =>{}}) {
         <>
             <Toast ref={toast}/>
             <Panel>
-                
-                <FloatLabel>
-                    <Calendar id="calendar" value={fecha} onChange={(e) => setFecha(e.value)} hourFormat="24" dateFormat="dd/mm/yy" />
-                    <label htmlFor='calendar'>Fecha</label>
-                </FloatLabel>
-
-                <FloatLabel>
-                    <Calendar id="hora" value={hora} onChange={(e) => setHora(e.value)} timeOnly />
-                    <label htmlFor='hora'>Hora</label>
-                </FloatLabel>
-
-                <label htmlFor="" className='me-3'>Medidor </label>
-                <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>
-            
-                <Editor id="direccion" value={direccion} onTextChange={(e) => setDireccion(e.textValue.trim())} style={{ height: '320px' }} /> 
+                <div className="row">
+                    <div className="col mt-3 mb-3">
+                        <FloatLabel>
+                            <Calendar id="calendar" value={fecha} onChange={(e) => setFecha(e.value)} hourFormat="24" dateFormat="dd/mm/yy" />
+                            <label htmlFor='calendar'>Fecha</label>
+                        </FloatLabel>
+                    </div>
+                    <div className="col mt-3 mb-3">
+                    <FloatLabel>
+                        <Calendar id="hora" value={hora} onChange={(e) => setHora(e.value)} timeOnly />
+                        <label htmlFor='hora'>Hora</label>
+                    </FloatLabel>
+                    </div>
+                    <div className="col mt-3 mb-3">
+                        <label htmlFor="" className='me-3'>Medidor </label>
+                        <Dropdown value={medidor} onChange={(e) => setMedidor(e.value)} options={listaMedidores} optionLabel="medidores"/>
+                        </div>
+                        <Editor id="direccion" value={direccion} onTextChange={(e) => setDireccion(e.textValue.trim())} style={{ height: '320px' }} /> 
+                    </div>
                 <div className="row">
                     <div className="col mt-5">
                     <FloatLabel>
