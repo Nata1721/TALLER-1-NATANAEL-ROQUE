@@ -53,7 +53,7 @@ function ViewMediciones({ mediciones, borrarMedicion }) {
                     placeholder="Unidades de medida" className="w-full md:w-14rem mt-3 me-3 mb-3" />
             <Button className="mb-3" label="Filtrar" onClick={()=>setUnidadFiltro(unidad)}   />
       
-      <DataTable value={listaAux} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
+      <DataTable emptyMessage="No hay mediciones registradas" value={listaAux} paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{ minWidth: "50rem" }}>
         <Column field="fecha" sortable header="Fecha"></Column>
         <Column field="hora" header="Hora"></Column>
         <Column field="medidor" header="Medidor"></Column>
